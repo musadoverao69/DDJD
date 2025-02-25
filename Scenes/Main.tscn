@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dha08oajfbq82"]
 
-[ext_resource type="Texture2D" uid="uid://bomuf1ety0vgu" path="res://space.jpg" id="1_for5g"]
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://diuappyqa8ct1" path="res://Enemy.tscn" id="2_mtbg6"]
 [ext_resource type="Texture2D" uid="uid://51dykskpqr7t" path="res://ship1.png" id="2_p4tsh"]
+[ext_resource type="Texture2D" uid="uid://bomuf1ety0vgu" path="res://Textures/space.jpg" id="3_gakwx"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 
 [node name="Main" type="Node2D"]
@@ -13,7 +13,7 @@ enemy_scene = ExtResource("2_mtbg6")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(360, 640)
 rotation = 1.57678
-texture = ExtResource("1_for5g")
+texture = ExtResource("3_gakwx")
 
 [node name="Player" type="Sprite2D" parent="."]
 position = Vector2(376, 1192)
