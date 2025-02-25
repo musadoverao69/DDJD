@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://diuappyqa8ct1"]
 
-[ext_resource type="Texture2D" uid="uid://dfns6y7ng2pgy" path="res://enemy.png" id="1_3ruvu"]
+[ext_resource type="Texture2D" uid="uid://c0skwlklrl82w" path="res://enemy.png" id="1_3ruvu"]
 [ext_resource type="Script" path="res://enemy.gd" id="1_ccc7a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k26k0"]
@@ -8,19 +8,6 @@ radius = 28.0
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_ccc7a")
-
-[node name="Label" type="Label" parent="."]
-offset_left = 88.0
-offset_top = 152.0
-offset_right = 128.0
-offset_bottom = 175.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(0, 0.0235294, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.0235294, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0.0117647, 0.0313726, 1)
-text = "word"
-horizontal_alignment = 1
-visible_ratio = -0.25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(128, 72)
@@ -31,3 +18,17 @@ texture = ExtResource("1_3ruvu")
 position = Vector2(128, 72)
 scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_k26k0")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+offset_left = 96.0
+offset_top = 88.0
+offset_right = 136.0
+offset_bottom = 111.0
+scale = Vector2(1.8, 1.8)
+theme_override_colors/font_color = Color(0, 0.0235294, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.0235294, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.0117647, 0.0313726, 1)
+text = "word"
+horizontal_alignment = 1
+visible_ratio = -0.25
