@@ -30,3 +30,6 @@ func lose_life():
 # Exibe "Game Over" e pausa o jogo
 func game_over():
 	get_tree().paused = true
+	await get_tree().create_timer(2).timeout
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Carrega o menu principal

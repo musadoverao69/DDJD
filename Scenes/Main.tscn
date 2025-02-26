@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=8 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bomuf1ety0vgu" path="res://Textures/space.jpg" id="3_gakwx"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
+radius = 17.1215
+height = 51.9481
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
@@ -17,11 +21,17 @@ rotation = 1.57678
 scale = Vector2(1.00821, 1.02722)
 texture = ExtResource("3_gakwx")
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Area2D" parent="."]
 position = Vector2(376, 1192)
 scale = Vector2(0.267, 0.22)
-texture = ExtResource("2_p4tsh")
 script = ExtResource("3_t0w0c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_p4tsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(7, 7)
+shape = SubResource("CapsuleShape2D_fy3uk")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
