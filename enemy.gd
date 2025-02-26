@@ -5,13 +5,13 @@ var target_word: String = ""  # Palavra associada à nave
 var typed_word: String = ""  # O que o jogador digitou
 
 func _ready():
-	$Label.text = target_word  # Exibir a palavra
-	print(target_word)
+	$WordLabel2.bbcode_enabled = true
+	$WordLabel2.text = target_word  # Exibir a palavra
+	print("Palavra atribuída ao inimigo:", target_word)
 
 func _process(delta):
 	# Movimentação para baixo
 	position.y += speed * delta
-
 	# Remover o inimigo caso saia da tela
 	if position.y > get_viewport_rect().size.y:
 		queue_free()
@@ -20,7 +20,7 @@ func _process(delta):
 func add_letter(letter: String):
 	if target_word.begins_with(typed_word + letter):
 		typed_word += letter
-		$Label.text = "[color=green]" + typed_word + "[/color]" + target_word.substr(typed_word.length())
+		$WordLabel2.text = "[color=green]" + typed_word + "[/color]" + target_word.substr(typed_word.length())
 		if typed_word == target_word:
 			destroy_enemy()
 
@@ -30,4 +30,4 @@ func destroy_enemy():
 	queue_free()
 
 func wrong_input():
-	print("")  # Pode piscar vermelho ou outro efeito
+	$WordLabel2.text = "[color=red]" + typed_word + "[/color]" + target_word.substr(typed_word.length())

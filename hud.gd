@@ -12,7 +12,7 @@ func _ready():
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
 	if get_tree().paused:
-		$PauseButton.text = "▶️ Resume"
+		$PauseButton.text = "⏸ Resume"
 	else:
 		$PauseButton.text = "⏸ Pause"
 
