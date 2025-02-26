@@ -27,7 +27,6 @@ func _input(event):
 		# Verifica se a tecla pressionada é válida
 		if key > 0:
 			var character = char(key)  # Converte o código em caractere
-			print("Tecla pressionada:", key, "Caractere:", char(key))
 			for enemy in get_tree().get_nodes_in_group("enemies"):
 				if enemy.has_method("add_letter"):  # Garante que o inimigo tem a função
 					enemy.add_letter(character)

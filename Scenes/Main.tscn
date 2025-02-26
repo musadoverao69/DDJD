@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=7 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
-[ext_resource type="PackedScene" uid="uid://diuappyqa8ct1" path="res://Enemy.tscn" id="2_mtbg6"]
-[ext_resource type="Texture2D" uid="uid://51dykskpqr7t" path="res://ship1.png" id="2_p4tsh"]
+[ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
+[ext_resource type="Texture2D" uid="uid://51dykskpqr7t" path="res://Textures/ship1.png" id="2_p4tsh"]
 [ext_resource type="Texture2D" uid="uid://bomuf1ety0vgu" path="res://Textures/space.jpg" id="3_gakwx"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
+[ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
 enemy_scene = ExtResource("2_mtbg6")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(360, 640)
+position = Vector2(359.214, 639.647)
 rotation = 1.57678
+scale = Vector2(1.00821, 1.02722)
 texture = ExtResource("3_gakwx")
 
 [node name="Player" type="Sprite2D" parent="."]
@@ -22,3 +24,37 @@ texture = ExtResource("2_p4tsh")
 script = ExtResource("3_t0w0c")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_ji0j8")
+
+[node name="PauseButton" type="Button" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.822
+anchor_top = 0.044
+anchor_right = 0.966
+anchor_bottom = 0.069
+offset_left = 0.159973
+offset_top = -8.32
+offset_right = -34.52
+offset_bottom = -9.32001
+grow_horizontal = 0
+scale = Vector2(1.5, 1.5)
+text = "⏸ Pause"
+
+[node name="LifeCounter" type="HBoxContainer" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.022
+anchor_top = 0.962
+anchor_right = 0.1
+anchor_bottom = 0.994
+offset_left = 0.159999
+offset_top = 0.639893
+offset_right = -13.0
+offset_bottom = -13.3201
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Label" type="Label" parent="HUD/LifeCounter"]
+layout_mode = 2
+text = "X 3"

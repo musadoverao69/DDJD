@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgkjjwpkg0ldd"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_g4hbi"]
+[ext_resource type="Texture2D" uid="uid://cckscfhj6gi5t" path="res://Textures/space2.jpg" id="2_o7slq"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 736.0
+offset_bottom = 1280.0
+script = ExtResource("1_g4hbi")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 736.0
+offset_bottom = 1308.0
+texture = ExtResource("2_o7slq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.011
+anchor_top = 0.125
+anchor_right = 0.981
+anchor_bottom = 0.262
+offset_left = 15.904
+offset_top = -8.0
+offset_right = -587.016
+offset_bottom = -152.36
+scale = Vector2(6, 6)
+text = "Astro Bounty"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.187
+anchor_right = 0.5
+anchor_bottom = 0.187
+offset_left = -48.0
+offset_top = 680.64
+offset_right = -2.0
+offset_bottom = 711.64
+scale = Vector2(2.5, 2.5)
+text = "Start"
