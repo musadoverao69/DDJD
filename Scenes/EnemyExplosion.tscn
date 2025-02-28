@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbglwvr2snxfw"]
+
+[ext_resource type="Script" path="res://enemy_explosion.gd" id="1_egjjy"]
+
+[sub_resource type="Gradient" id="Gradient_qbxyw"]
+offsets = PackedFloat32Array(0, 0.98, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.901961, 0.901961, 0.901961, 0, 1, 1, 1, 0.941176)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+scale = Vector2(3, 3)
+emitting = false
+amount = 65
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 140.4
+color_ramp = SubResource("Gradient_qbxyw")
+script = ExtResource("1_egjjy")

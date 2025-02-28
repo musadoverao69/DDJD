@@ -4,6 +4,8 @@ extends Node2D
 var target_word: String = ""  # Palavra associada à nave
 var typed_word: String = ""  # O que o jogador digitou
 
+var plEnemyExplosion := preload("res://Scenes/EnemyExplosion.tscn")
+
 func _ready():
 	$WordLabel2.bbcode_enabled = true
 	$WordLabel2.text = target_word  # Exibir a palavra
@@ -26,8 +28,16 @@ func add_letter(letter: String):
 
 
 func destroy_enemy():
-	print("Inimigo destruído!")  # Aqui você pode adicionar explosão e efeitos
-	queue_free()
+	print("Inimigo destruído!")
+	var effect := plEnemyExplosion.instantiate()
+	effect.global_position = global_position
+	get_tree().current_scene.add_child(effect)
+	
+	queue_free()  # Remove o inimigo
+
+
+
+
 
 func wrong_input():
 	$WordLabel2.text = "[color=red]" + typed_word + "[/color]" + target_word.substr(typed_word.length())

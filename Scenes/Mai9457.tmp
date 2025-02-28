@@ -24,6 +24,7 @@ texture = ExtResource("3_t6k68")
 position = Vector2(376, 1192)
 scale = Vector2(0.267, 0.22)
 script = ExtResource("3_t0w0c")
+speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(4.5, 4.5)
