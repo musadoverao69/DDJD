@@ -11,10 +11,19 @@ func _ready():
 # Função para alternar o estado de pausa
 func toggle_pause():
 	get_tree().paused = not get_tree().paused
+	
 	if get_tree().paused:
 		$PauseButton.text = "⏸ Resume"
+		$HomeButton.visible = true  # Mostra o botão Home quando pausado
 	else:
 		$PauseButton.text = "⏸ Pause"
+		$HomeButton.visible = false  # Esconde o botão Home quando despausado
+
+func _on_home_button_pressed():
+	get_tree().paused = false  # Despausa antes de mudar de cena
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Muda para o menu principal
+
+
 
 # Atualiza o texto do contador de vidas
 func update_life_counter():

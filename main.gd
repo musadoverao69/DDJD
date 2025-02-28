@@ -30,3 +30,8 @@ func _input(event):
 			for enemy in get_tree().get_nodes_in_group("enemies"):
 				if enemy.has_method("add_letter"):  # Garante que o inimigo tem a função
 					enemy.add_letter(character)
+
+
+func _on_home_button_pressed():
+	get_tree().paused = false  # Despausa antes de mudar de cena
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Muda para o menu principal
