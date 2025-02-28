@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=10 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Texture2D" uid="uid://bdingj2rutr0n" path="res://Textures/Background.jpg" id="3_t6k68"]
+[ext_resource type="PackedScene" uid="uid://bugs7vofjtnlk" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
 [ext_resource type="Texture2D" uid="uid://bs3vb325a3xp1" path="res://Textures/player_sheet.png" id="5_ageo2"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
@@ -15,13 +16,14 @@ height = 50.6494
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
 enemy_scene = ExtResource("2_mtbg6")
+powerup_scene = ExtResource("3_u5f3q")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(363, 668)
 scale = Vector2(1.03429, 0.951429)
 texture = ExtResource("3_t6k68")
 
-[node name="Player" type="Area2D" parent="."]
+[node name="Player" type="Area2D" parent="." groups=["player"]]
 position = Vector2(376, 1192)
 scale = Vector2(0.267, 0.22)
 script = ExtResource("3_t0w0c")

@@ -3,17 +3,22 @@ extends Node2D
 @export var speed: float = 100.0  # Velocidade da nave inimiga
 var target_word: String = ""  # Palavra associada à nave
 var typed_word: String = ""  # O que o jogador digitou
+var player: Area2D
 
 var plEnemyExplosion := preload("res://Scenes/EnemyExplosion.tscn")
+
+signal destroyed
 
 func _ready():
 	$WordLabel2.bbcode_enabled = true
 	$WordLabel2.text = target_word  # Exibir a palavra
-	print("Palavra atribuída ao inimigo:", target_word)
+	player = get_tree().get_first_node_in_group("player")  # Obtém referência ao player
 
 func _process(delta):
 	# Movimentação para baixo
-	position.y += speed * delta
+	if player:
+		var direction = (player.position - position).normalized()
+		position += direction * speed * delta  # Move na direção do player
 	# Remover o inimigo caso saia da tela
 	if position.y > get_viewport_rect().size.y:
 		queue_free()
@@ -28,16 +33,11 @@ func add_letter(letter: String):
 
 
 func destroy_enemy():
-	print("Inimigo destruído!")
 	var effect := plEnemyExplosion.instantiate()
 	effect.global_position = global_position
 	get_tree().current_scene.add_child(effect)
-	
+	destroyed.emit()
 	queue_free()  # Remove o inimigo
-
-
-
-
 
 func wrong_input():
 	$WordLabel2.text = "[color=red]" + typed_word + "[/color]" + target_word.substr(typed_word.length())

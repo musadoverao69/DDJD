@@ -1,10 +1,20 @@
 extends Node2D
 
 @export var enemy_scene: PackedScene  # Cena do inimigo
+@export var powerup_scene: PackedScene 
 @export var spawn_interval: float = 2.0  # Tempo entre spawns
 
 var spawn_timer: float = 0.0
-var words := ["space", "galaxy", "planet", "asteroid", "blackhole"]  # Lista de palavras
+var enemies_destroyed: int = 0
+var min_x: float = 20
+var max_x: float = 700
+
+var words := [
+	"space", "galaxy", "planet", "asteroid", "blackhole",
+	"nebula", "starship", "orbit", "cosmos", "supernova",
+	"engine", "shader", "prototype", "gameloop", "debug",
+	"sprite", "pixelart", "viewport", "collision", "particles",
+	"feup", "the", "happy", "tese", "put"]
 
 func _process(delta):
 	spawn_timer += delta
@@ -15,10 +25,23 @@ func _process(delta):
 func spawn_enemy():
 	if enemy_scene:
 		var enemy = enemy_scene.instantiate()
-		enemy.position = Vector2(randf() * get_viewport_rect().size.x, 0)  # Spawn aleatório no topo
+		enemy.position = Vector2(randf_range(min_x, max_x), 0)  # Spawn aleatório no topo
 		enemy.target_word = words.pick_random()  # Escolher uma palavra aleatória
-		add_child(enemy)
 		enemy.add_to_group("enemies")
+		enemy.destroyed.connect(_on_enemy_destroyed)
+		add_child(enemy)
+
+func _on_enemy_destroyed():
+	enemies_destroyed += 1
+	if enemies_destroyed % 10 == 0:
+		spawn_powerup()
+
+func spawn_powerup():
+	if powerup_scene:
+		var powerup = powerup_scene.instantiate()
+		powerup.position = Vector2(randf() * get_viewport_rect().size.x, 0)
+		add_child(powerup)
+		print("🎁 Power-up liberado!")
 
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
