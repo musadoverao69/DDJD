@@ -33,5 +33,7 @@ func _input(event):
 
 
 func _on_home_button_pressed():
+	print("🏠 HomeButton pressionado!")  # Debug
 	get_tree().paused = false  # Despausa antes de mudar de cena
-	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Muda para o menu principal
+	var result = get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Tenta mudar de cena
+	print("Mudança de cena resultado:", result)  # Debug
