@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgkjjwpkg0ldd"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_g4hbi"]
-[ext_resource type="Texture2D" uid="uid://b3tfhne1likka" path="res://Textures/menu_back.jpg" id="2_3aoqf"]
+[ext_resource type="Texture2D" uid="uid://k1uqharvej0c" path="res://Textures/backg.jpg" id="2_fk112"]
 [ext_resource type="Theme" uid="uid://t5k3e7e7dl5j" path="res://custom.tres" id="3_htmh6"]
 [ext_resource type="Texture2D" uid="uid://bfpafcin0fpt4" path="res://Textures/title.png" id="3_piya1"]
 [ext_resource type="Texture2D" uid="uid://b0xdfn3nly5n6" path="res://Textures/Start.png" id="5_4nkn4"]
@@ -15,12 +15,13 @@ script = ExtResource("1_g4hbi")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 711.0
-offset_top = 2.0
-offset_right = 1984.0
-offset_bottom = 713.0
-rotation = 1.5708
-texture = ExtResource("2_3aoqf")
+offset_left = 13.0
+offset_top = -110.0
+offset_right = 2879.0
+offset_bottom = 1487.0
+texture = ExtResource("2_fk112")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 1
