@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://boaafh75non66"]
+
+[ext_resource type="Script" path="res://letter_projectile.gd" id="1_3lc2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwg4r"]
+size = Vector2(48, 45)
+
+[node name="LetterProjectile" type="Area2D"]
+script = ExtResource("1_3lc2r")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -16.0
+offset_right = 13.0
+offset_bottom = 15.0
+scale = Vector2(1.3, 1.3)
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_lwg4r")
