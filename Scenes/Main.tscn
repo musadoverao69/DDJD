@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=12 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
@@ -12,6 +12,20 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
 radius = 25.3247
 height = 50.6494
+
+[sub_resource type="Gradient" id="Gradient_rqjaj"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.637775, 0.637775, 0.637775, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k3lf7"]
+gradient = SubResource("Gradient_rqjaj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.8)
+metadata/_snap_enabled = true
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
@@ -37,6 +51,13 @@ hframes = 3
 position = Vector2(-22.4719, 18.1818)
 scale = Vector2(7, 7)
 shape = SubResource("CapsuleShape2D_fy3uk")
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+position = Vector2(-14.9813, -1.52588e-05)
+scale = Vector2(10.7678, 13.6364)
+color = Color(0.301961, 0.964706, 0.984314, 1)
+energy = 3.0
+texture = SubResource("GradientTexture2D_k3lf7")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var initial_lives: int = 3  # Número inicial de vidas
 var lives: int
+@onready var life_icons := [$LifeCounter/Life1, $LifeCounter/Life2, $LifeCounter/Life3]  # Lista de corações
 
 func _ready():
 	lives = initial_lives
@@ -28,6 +29,13 @@ func _on_home_button_pressed():
 # Atualiza o texto do contador de vidas
 func update_life_counter():
 	$LifeCounter/Label.text = "X " + str(lives)
+	# Esconde os corações de acordo com a quantidade de vidas restantes
+	for i in range(3):  # Loop de 0 a 2
+		if i < lives:
+			life_icons[i].visible = true  # Mantém visível se o jogador ainda tiver essa vida
+		else:
+			life_icons[i].visible = false  # Esconde se a vida foi perdida
+
 
 # Reduz vidas e verifica fim de jogo
 func lose_life():

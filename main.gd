@@ -14,7 +14,7 @@ var words := [
 	"nebula", "starship", "orbit", "cosmos", "supernova",
 	"engine", "shader", "prototype", "gameloop", "debug",
 	"sprite", "pixelart", "viewport", "collision", "particles",
-	"feup", "the", "happy", "tese", "put"]
+	"feup", "there", "happy", "tese", "put"]
 
 func _process(delta):
 	spawn_timer += delta

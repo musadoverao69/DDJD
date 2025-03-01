@@ -1,7 +1,7 @@
 extends Area2D  # Alterado para Area2D
 
 @onready var sprite := $Sprite2D
-
+@onready var powerup_light := $PointLight2D
 
 @export var speed := 300
 var base_speed := 300
@@ -11,6 +11,7 @@ var max_x: float = 700
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_area_entered"))  # Conecta o sinal
+	powerup_light.visible = false
 
 func _process(delta):
 	var input_vector = Vector2.ZERO
@@ -40,8 +41,11 @@ func _on_area_entered(area):
 	
 func apply_powerup():
 	powerup_active = true
+	powerup_light.visible = true
 	print("💣 Power-up ativado: Pressione ENTER para destruir todas as naves!")
 
 func destroy_all_enemies():
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.destroy_enemy()
+	powerup_active = false
+	powerup_light.visible = false  
