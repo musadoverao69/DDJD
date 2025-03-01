@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh54wadnfkm0m"]
+[gd_scene load_steps=2 format=3 uid="uid://xp6a2ja5qlxr"]
 
 [sub_resource type="GDScript" id="GDScript_a21rl"]
 script/source = "extends CPUParticles2D
