@@ -4,6 +4,7 @@ extends Node2D
 var target_word: String = ""  # Palavra associada à nave
 var typed_word: String = ""  # O que o jogador digitou
 var player: Area2D
+@onready var explosion_sound := $DeathSound 
 
 var plEnemyExplosion := preload("res://Scenes/EnemyExplosion.tscn")
 
@@ -36,13 +37,20 @@ func destroy_enemy():
 	var effect := plEnemyExplosion.instantiate()
 	effect.global_position = global_position
 	get_tree().current_scene.add_child(effect)
-	
+
+	explosion_sound.play()  # Toca o som da explosão
+
+	# Clona o som para que continue a tocar mesmo após remover o inimigo
+	var sound_clone := explosion_sound.duplicate()
+	get_tree().current_scene.add_child(sound_clone)
+	sound_clone.play()
+
 	# Emite o sinal de que o inimigo foi destruído
-	emit_signal("destroyed")  # Esta linha deve ser adicionada
-	
+	emit_signal("destroyed")
 	Signals.emit_signal("on_score_increment", 1)
 
-	queue_free()  # Remove o inimigo
+	queue_free()  # Remove o inimigo imediatamente
+
 
 
 

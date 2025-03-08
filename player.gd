@@ -45,8 +45,12 @@ func _on_area_entered(area):
 			print("🛡️ Inimigo destruído por colidir com o jogador invencível!")
 			area.queue_free()  # Destroi o inimigo ao colidir
 		else:
+			# Toca o som de hit imediatamente
+			$hit_sound.play()  # Aqui o nó "hit_sound" é um AudioStreamPlayer2D no jogador
+
 			area.queue_free()  # Destroi o inimigo normalmente
 			$"/root/Main/HUD".lose_life()  # Reduz uma vida usando o HUD
+
 
 
 # Power-up de invencibilidade

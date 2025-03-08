@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dog6dnupt7s46"]
+[gd_scene load_steps=5 format=3 uid="uid://dog6dnupt7s46"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_ccc7a"]
 [ext_resource type="Texture2D" uid="uid://canecrj08g2ml" path="res://Textures/enemyShip.png" id="2_1dci8"]
+[ext_resource type="AudioStream" uid="uid://dj8qjnpf3fbwf" path="res://Sounds/explosion.mp3" id="3_l3xyw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k26k0"]
 radius = 28.0
@@ -30,3 +31,6 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_l3xyw")
