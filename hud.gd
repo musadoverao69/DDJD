@@ -8,6 +8,18 @@ func _ready():
 	lives = initial_lives
 	update_life_counter()
 	$PauseButton.pressed.connect(toggle_pause)
+	Signals.on_score_increment.connect(self._on_score_increment)
+
+
+	
+	
+@onready var scoreLabel := $Score
+var score: int = 0
+
+func _on_score_increment(amount: int):
+	score += amount
+	$Score.text = str(score)
+
 
 # Função para alternar o estado de pausa
 func toggle_pause():

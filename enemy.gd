@@ -36,8 +36,15 @@ func destroy_enemy():
 	var effect := plEnemyExplosion.instantiate()
 	effect.global_position = global_position
 	get_tree().current_scene.add_child(effect)
-	destroyed.emit()
+	
+	# Emite o sinal de que o inimigo foi destruído
+	emit_signal("destroyed")  # Esta linha deve ser adicionada
+	
+	Signals.emit_signal("on_score_increment", 1)
+
 	queue_free()  # Remove o inimigo
+
+
 
 func wrong_input():
 	$WordLabel2.text = "[color=red]" + typed_word + "[/color]" + target_word.substr(typed_word.length())

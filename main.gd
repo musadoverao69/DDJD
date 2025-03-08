@@ -33,15 +33,26 @@ func spawn_enemy():
 
 func _on_enemy_destroyed():
 	enemies_destroyed += 1
-	if enemies_destroyed % 10 == 0:
+	if enemies_destroyed % 20 == 0:
 		spawn_powerup()
 
 func spawn_powerup():
 	if powerup_scene:
 		var powerup = powerup_scene.instantiate()
 		powerup.position = Vector2(randf() * get_viewport_rect().size.x, 0)
+
+		# Sorteia aleatoriamente entre os tipos de power-ups
+		var powerup_type = randi() % 2  # 0 ou 1
+
+		if powerup_type == 0:
+			powerup.type = "destroy"  # Power-up que destrói todos os inimigos
+		else:
+			powerup.type = "invincibility"  # Power-up de invencibilidade
+		
 		add_child(powerup)
-		print("🎁 Power-up liberado!")
+		print("🎁 Power-up liberado: " + ( "Destruir todos" if powerup.type == "destroy" else "Invencibilidade"))
+
+
 
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
