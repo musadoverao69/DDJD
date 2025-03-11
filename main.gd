@@ -9,14 +9,13 @@ extends Node2D
 
 var current_wave := 1  # Começa na wave 1
 var enemies_remaining := 0  # Contador de inimigos restantes
-var spawn_timer: float = 0.0
 var enemies_destroyed: int = 0
 var min_x: float = 20
 var max_x: float = 700
 
 @onready var hud := $HUD
 @onready var wave_label := $HUD/WaveLabel  # Certifique-se de ter um Label na HUD
-
+@onready var player := $Player 
 
 var words := [
 	"space", "galaxy", "planet", "asteroid", "blackhole",
@@ -27,21 +26,22 @@ var words := [
 
 func _ready():
 	start_wave()  # Começa a primeira wave quando o jogo iniciar
+	player.enemy_collided.connect(_on_enemy_destroyed)
 
 func spawn_enemy():
 	if enemy_scene:
-		var enemy = enemy_scene.instantiate()
+		var enemy = enemy_shooter_scene.instantiate()
 		enemy.position = Vector2(randf_range(min_x, max_x), 0)  # Spawn aleatório no topo
 		enemy.target_word = words.pick_random()  # Escolher uma palavra aleatória
 		enemy.add_to_group("enemies")
 		enemy.destroyed.connect(_on_enemy_destroyed)
 		add_child(enemy)
 
-
 func _on_enemy_destroyed():
 	enemies_remaining -= 1  # Reduz o número de inimigos restantes
-	print("💀 Inimigo destruído! Restantes:", enemies_remaining)  # Debug
-
+	enemies_destroyed += 1 # Aumenta o número de inimigos mortos
+	if enemies_destroyed % 10 == 0:
+		spawn_powerup()
 	# 🚨 Garante que a wave só termina quando todos os inimigos forem eliminados
 	if enemies_remaining <= 0:
 		check_wave_complete()
@@ -88,7 +88,10 @@ func start_wave():
 
 	# ⏳ Spawnando os inimigos com delay entre cada um
 	for i in range(enemies_to_spawn):
-		await get_tree().create_timer(0.5).timeout  # Pequeno delay para evitar spawn instantâneo
+		while get_tree().paused:  # ⚠️ Aguarda enquanto o jogo estiver pausado
+			await get_tree().process_frame  # Espera um frame antes de checar novamente
+		
+		await get_tree().create_timer(1).timeout  # Pequeno delay para evitar spawn instantâneo
 		spawn_enemy()
 
 func check_wave_complete():

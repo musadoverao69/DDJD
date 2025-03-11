@@ -13,6 +13,8 @@ var is_invincible := false  # Jogador começa sem invencibilidade
 var min_x: float = 20
 var max_x: float = 700
 
+signal enemy_collided
+
 func _ready():
 	connect("area_entered", Callable(self, "_on_area_entered"))  # Conecta o sinal
 	powerup_light.visible = false
@@ -42,15 +44,14 @@ func _process(delta):
 func _on_area_entered(area):
 	if area.is_in_group("enemies"):  # Verifica se o objeto é um inimigo
 		if is_invincible:  # Se o jogador está invencível
-			print("🛡️ Inimigo destruído por colidir com o jogador invencível!")
 			area.queue_free()  # Destroi o inimigo ao colidir
+			emit_signal("enemy_collided")
 		else:
 			# Toca o som de hit imediatamente
 			$hit_sound.play()  # Aqui o nó "hit_sound" é um AudioStreamPlayer2D no jogador
-
 			area.queue_free()  # Destroi o inimigo normalmente
 			$"/root/Main/HUD".lose_life()  # Reduz uma vida usando o HUD
-
+			emit_signal("enemy_collided") # 🚨 Emite o sinal para o Main reduzir o número de inimigos restantes
 
 
 # Power-up de invencibilidade
