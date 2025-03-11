@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://boaafh75non66"]
+[gd_scene load_steps=3 format=3 uid="uid://bhbw3srww6c2d"]
 
 [ext_resource type="Script" path="res://letter_projectile.gd" id="1_3lc2r"]
 
@@ -6,6 +6,7 @@
 size = Vector2(48, 45)
 
 [node name="LetterProjectile" type="Area2D"]
+collision_layer = 3
 script = ExtResource("1_3lc2r")
 
 [node name="Label" type="Label" parent="."]
@@ -18,6 +19,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="ColorRect" type="ColorRect" parent="Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.993
+offset_right = -1.926
+offset_bottom = -0.783001
+color = Color(0, 0, 0, 0.666667)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_lwg4r")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -14,7 +14,7 @@ func _ready():
 		sprite.texture = preload("res://Textures/shield.png")   
 
 	# Ajustar o tamanho do sprite 
-	sprite.scale = Vector2(0.08, 0.08)  
+	sprite.scale = Vector2(0.05, 0.05)  
 
 func _process(delta):
 	position.y += speed * delta  # Move o power-up para baixo
@@ -23,7 +23,6 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.name == "Player":
-		print("✨ Power-up coletado!")
 		if type == "destroy":
 			area.apply_powerup("destroy")  # Aplica o power-up de destruir todos os inimigos
 		elif type == "invincibility":

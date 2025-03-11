@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqcag47hi80ty"]
+[gd_scene load_steps=5 format=3 uid="uid://dv6125bir4jsb"]
 
 [ext_resource type="Script" path="res://enemy_shooter.gd" id="1_5qky1"]
+[ext_resource type="PackedScene" uid="uid://bhbw3srww6c2d" path="res://Scenes/LetterProjectile.tscn" id="2_bx7xh"]
 [ext_resource type="Texture2D" uid="uid://canecrj08g2ml" path="res://Textures/enemyShip.png" id="2_u5xqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xe6bj"]
@@ -8,6 +9,7 @@ radius = 32.0
 
 [node name="EnemyShooter" type="Area2D"]
 script = ExtResource("1_5qky1")
+letter_scene = ExtResource("2_bx7xh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -0.05)
@@ -18,18 +20,23 @@ texture = ExtResource("2_u5xqm")
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_xe6bj")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -32.0
-offset_top = 32.0
-offset_right = 96.0
-offset_bottom = 64.0
+[node name="WordLabel" type="RichTextLabel" parent="."]
+offset_left = -48.0
+offset_top = 40.0
+offset_right = 63.0
+offset_bottom = 72.0
 scale = Vector2(1.5, 1.5)
+size_flags_horizontal = 6
+size_flags_vertical = 6
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
 [node name="ShootTimer" type="Timer" parent="."]
+autostart = true
 
 [node name="LettersSpawner" type="Node2D" parent="."]
 position = Vector2(0, 24)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

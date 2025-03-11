@@ -3,6 +3,9 @@ extends CanvasLayer
 @export var initial_lives: int = 3  # Número inicial de vidas
 var lives: int
 @onready var life_icons := [$LifeCounter/Life1, $LifeCounter/Life2, $LifeCounter/Life3]  # Lista de corações
+@onready var scoreLabel := $Score
+@onready var wave_label := $WaveLabel
+var score: int = 0
 
 func _ready():
 	lives = initial_lives
@@ -10,16 +13,9 @@ func _ready():
 	$PauseButton.pressed.connect(toggle_pause)
 	Signals.on_score_increment.connect(self._on_score_increment)
 
-
-	
-	
-@onready var scoreLabel := $Score
-var score: int = 0
-
 func _on_score_increment(amount: int):
 	score += amount
 	$Score.text = str(score)
-
 
 # Função para alternar o estado de pausa
 func toggle_pause():
@@ -36,8 +32,6 @@ func _on_home_button_pressed():
 	get_tree().paused = false  # Despausa antes de mudar de cena
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Muda para o menu principal
 
-
-
 # Atualiza o texto do contador de vidas
 func update_life_counter():
 	$LifeCounter/Label.text = "X " + str(lives)
@@ -47,7 +41,6 @@ func update_life_counter():
 			life_icons[i].visible = true  # Mantém visível se o jogador ainda tiver essa vida
 		else:
 			life_icons[i].visible = false  # Esconde se a vida foi perdida
-
 
 # Reduz vidas e verifica fim de jogo
 func lose_life():

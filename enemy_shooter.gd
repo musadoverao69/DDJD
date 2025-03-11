@@ -5,11 +5,15 @@ extends Node2D
 var target_word: String = ""  # Palavra do inimigo
 var typed_word: String = ""  # O que o jogador digitou
 
+signal destroyed
+
 func _ready():
 	$WordLabel.bbcode_enabled = true
 	$WordLabel.text = target_word  # Exibir a palavra
-	print("Inimigo atirador criado com a palavra:", target_word)
+	$ShootTimer.wait_time = 8.0
 	$ShootTimer.start()  # Inicia o timer de disparo
+	$ShootTimer.timeout.connect(_on_ShootTimer_timeout)
+	_on_ShootTimer_timeout() # Força o disparo
 
 func _process(delta):
 	position.y += speed * delta  # Movimentação para baixo
@@ -27,6 +31,9 @@ func add_letter(letter: String):
 
 func destroy_enemy():
 	print("Inimigo destruído!")  
+	
+	# Emite o sinal de que o inimigo foi destruído
+	emit_signal("destroyed")
 	queue_free()
 
 func _on_ShootTimer_timeout():
@@ -34,7 +41,15 @@ func _on_ShootTimer_timeout():
 
 func shoot_letter():
 	if letter_scene:
-		var letter_projectile = letter_scene.instantiate()
-		letter_projectile.position = $LettersSpawner.global_position
-		letter_projectile.letter = String.chr(randi_range(65, 90))  # Letra aleatória (A-Z)
-		get_parent().add_child(letter_projectile)
+		var angles = [-PI - PI / 4, -PI - PI / 2, 2 * -PI + PI / 4] 
+		for angle in angles: 
+			var letter_projectile = letter_scene.instantiate()
+			letter_projectile.position = $LettersSpawner.global_position
+			letter_projectile.letter = String.chr(randi_range(65, 90))  # Letra aleatória (A-Z)
+			letter_projectile.direction = Vector2.from_angle(angle) 
+			get_parent().add_child(letter_projectile)
+		
+
+
+func _on_shoot_timer_timeout() -> void:
+	pass # Replace with function body.

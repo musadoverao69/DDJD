@@ -70,7 +70,6 @@ func apply_powerup(powerup_type):
 	if powerup_type == "destroy":
 		powerup_active = true
 		powerup_light.visible = true
-		print("💣 Power-up ativado: Pressione ENTER para destruir todas as naves!")
 	elif powerup_type == "invincibility":
 		activate_invincibility()  # Chama a função correta de invencibilidade
 
