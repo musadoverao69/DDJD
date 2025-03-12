@@ -20,12 +20,12 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_k26k0")
 
 [node name="WordLabel2" type="RichTextLabel" parent="."]
-offset_left = -48.0
+offset_left = -35.0
 offset_top = 40.0
-offset_right = 63.0
+offset_right = 76.0
 offset_bottom = 72.0
 scale = Vector2(1.5, 1.5)
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 6
 bbcode_enabled = true
 fit_content = true

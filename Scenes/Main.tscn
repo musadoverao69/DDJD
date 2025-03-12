@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=17 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
 [ext_resource type="AudioStream" uid="uid://cqrpka1qwerq0" path="res://Sounds/hit.mp3" id="7_ntapv"]
 [ext_resource type="AudioStream" uid="uid://dx8mj2eq325tl" path="res://Sounds/background.mp3" id="9_enh43"]
+[ext_resource type="Script" path="res://wave_label.gd" id="11_mhvwb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
 radius = 25.3247
@@ -29,6 +30,33 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.8)
 metadata/_snap_enabled = true
+
+[sub_resource type="FontFile" id="FontFile_dvovh"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/2/0/ascent = 0.0
+cache/0/2/0/descent = 0.0
+cache/0/2/0/underline_position = 0.0
+cache/0/2/0/underline_thickness = 0.0
+cache/0/2/0/scale = 1.0
+cache/0/3/0/ascent = 0.0
+cache/0/3/0/descent = 0.0
+cache/0/3/0/underline_position = 0.0
+cache/0/3/0/underline_thickness = 0.0
+cache/0/3/0/scale = 1.0
+cache/0/4/0/ascent = 0.0
+cache/0/4/0/descent = 0.0
+cache/0/4/0/underline_position = 0.0
+cache/0/4/0/underline_thickness = 0.0
+cache/0/4/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
@@ -154,8 +182,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WaveLabel" type="Label" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 23.0
+clip_contents = true
+anchors_preset = -1
+anchor_top = 0.444
+anchor_right = 0.711
+anchor_bottom = 0.55
+offset_left = 16.0
+offset_top = 7.67993
+offset_right = 8.07999
+offset_bottom = -8.0
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.0823529, 0.756863, 0.92549, 1)
+theme_override_fonts/font = SubResource("FontFile_dvovh")
+theme_override_font_sizes/font_size = 64
+script = ExtResource("11_mhvwb")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(363, 668)

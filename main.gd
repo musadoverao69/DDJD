@@ -18,21 +18,26 @@ var max_x: float = 700
 @onready var player := $Player 
 
 var words := [
-	"space", "galaxy", "planet", "asteroid", "blackhole",
-	"nebula", "starship", "orbit", "cosmos", "supernova",
-	"engine", "shader", "prototype", "gameloop", "debug",
-	"sprite", "pixelart", "viewport", "collision", "particles",
-	"feup", "there", "happy", "tese", "put"]
+	"space", "galaxy", "planet", "nebula", "starship", "orbit", 
+	"cosmos", "engine", "shader", "debug", "sprite","feup",
+	"there", "happy", "tese", "hand"]
+
+var difficult_words := [
+	"pixelart", "viewport", "collision", "particles","supernova",
+	"asteroid", "blackhole","prototype", "gameloop"]
 
 func _ready():
 	start_wave()  # Começa a primeira wave quando o jogo iniciar
 	player.enemy_collided.connect(_on_enemy_destroyed)
 
-func spawn_enemy():
-	if enemy_scene:
-		var enemy = enemy_shooter_scene.instantiate()
+func spawn_enemy(enemy_type: PackedScene = enemy_scene):  # Padrão: enemy_scene
+	if enemy_type:
+		var enemy = enemy_type.instantiate()
 		enemy.position = Vector2(randf_range(min_x, max_x), 0)  # Spawn aleatório no topo
-		enemy.target_word = words.pick_random()  # Escolher uma palavra aleatória
+		if enemy_type == enemy_scene:
+			enemy.target_word = words.pick_random()  # Escolher uma palavra aleatória
+		else:
+			enemy.target_word = difficult_words.pick_random()
 		enemy.add_to_group("enemies")
 		enemy.destroyed.connect(_on_enemy_destroyed)
 		add_child(enemy)
@@ -81,18 +86,33 @@ func start_wave():
 	wave_label.show()
 	await get_tree().create_timer(2).timeout  # Exibe por 2 segundos
 	wave_label.hide()
-
-	# 🚨 Corrigindo a contagem de inimigos antes de iniciar a wave
-	var enemies_to_spawn = current_wave * 3 
+	# 🚨 Ajustando o número de inimigos para cada wave
+	var enemies_to_spawn = current_wave + 3 
 	enemies_remaining = enemies_to_spawn
-
+	# 📌 Determinando quantos inimigos atiradores devem aparecer
+	var shooter_count = 0
+	if current_wave in [3, 4, 5]:  
+		shooter_count = 1  # 1 inimigo shooter nessas waves
+	elif current_wave in [6, 7, 8, 9]:  
+		shooter_count = 2  # 2 inimigos shooter nessas waves
+	# Criando uma lista com os tipos de inimigos a serem spawnados
+	var enemy_list = []
+	# Adiciona os shooters na lista
+	for i in range(shooter_count):
+		enemy_list.append(enemy_shooter_scene)
+	# Adiciona os inimigos normais na lista
+	for i in range(enemies_to_spawn - shooter_count):
+		enemy_list.append(enemy_scene)
+	# Embaralha a lista para spawn aleatório
+	enemy_list.shuffle()
 	# ⏳ Spawnando os inimigos com delay entre cada um
-	for i in range(enemies_to_spawn):
+	for enemy_type in enemy_list:
 		while get_tree().paused:  # ⚠️ Aguarda enquanto o jogo estiver pausado
 			await get_tree().process_frame  # Espera um frame antes de checar novamente
 		
-		await get_tree().create_timer(1).timeout  # Pequeno delay para evitar spawn instantâneo
-		spawn_enemy()
+		await get_tree().create_timer(1).timeout  # Pequeno delay entre os spawns
+		
+		spawn_enemy(enemy_type)  # Agora os inimigos surgem aleatoriamente
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
@@ -105,8 +125,10 @@ func check_wave_complete():
 
 func show_wave_complete():
 	hud.hide()  # Esconde a HUD temporariamente
+	wave_label.score = hud.score  # Atualiza o score antes de exibir
 	wave_label.text = "WAVE " + str(current_wave).pad_zeros(3) + " CLEAR"
 	wave_label.show()
+	wave_label.queue_redraw()  # Redesenha para garantir que o score apareça atualizado
 
 	await get_tree().create_timer(3).timeout  # Exibe por 3 segundos
 	wave_label.hide()

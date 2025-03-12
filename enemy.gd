@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed: float = 100.0  # Velocidade da nave inimiga
+@export var speed: float = 77.0  # Velocidade da nave inimiga
 var target_word: String = ""  # Palavra associada à nave
 var typed_word: String = ""  # O que o jogador digitou
 var player: Area2D
