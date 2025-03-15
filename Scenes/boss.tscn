@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ir2gxsebbuaa"]
+
+[ext_resource type="Texture2D" uid="uid://x2v1jh0gu68g" path="res://Textures/back3.jpg" id="1_f8k4d"]
+[ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="2_pjwj8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_555vg"]
+
+[node name="Boss_Fight" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(356.5, 637.5)
+scale = Vector2(0.982337, 0.994648)
+texture = ExtResource("1_f8k4d")
+
+[node name="Boss" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss"]
+shape = SubResource("CircleShape2D_555vg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Boss"]
+position = Vector2(348, 305)
+scale = Vector2(0.329641, 0.304979)
+texture = ExtResource("2_pjwj8")

@@ -7,6 +7,9 @@ extends Node2D
 @export var total_waves := 10  # Número total de waves
 @export var spawn_delay: float = 1.5 
 
+@onready var boss_node: Area2D = $Boss  # Pega o nó Boss
+
+
 var current_wave := 1  # Começa na wave 1
 var enemies_remaining := 0  # Contador de inimigos restantes
 var spawn_timer: float = 0.0
@@ -40,11 +43,17 @@ func spawn_enemy():
 
 func _on_enemy_destroyed():
 	enemies_remaining -= 1  # Reduz o número de inimigos restantes
+	enemies_destroyed += 1  # Incrementa o contador de inimigos mortos
 	print("💀 Inimigo destruído! Restantes:", enemies_remaining)  # Debug
+	
+
 
 	# 🚨 Garante que a wave só termina quando todos os inimigos forem eliminados
 	if enemies_remaining <= 0:
 		check_wave_complete()
+		
+		
+
 
 func spawn_powerup():
 	if powerup_scene:
@@ -93,12 +102,20 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
+		if current_wave == 5:  # Quando a wave 5 termina, ativa o boss e para as waves
+			print("⚠️ O Boss apareceu! Nenhuma wave nova será iniciada.")
+			boss_node.visible = true  # Torna o boss visível
+			boss_node.process_mode = Node.PROCESS_MODE_INHERIT  # Ativa processamento do boss
+			return  # Cancela qualquer nova wave
+		
 		if current_wave < total_waves:
 			await get_tree().create_timer(1).timeout  # Pequena pausa antes da nova wave
 			current_wave += 1
 			show_wave_complete()
 		else:
 			game_won()  # Se for a última wave, o jogo termina
+
+
 
 func show_wave_complete():
 	hud.hide()  # Esconde a HUD temporariamente
