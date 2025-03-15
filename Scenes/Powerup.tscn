@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bafdyborke2hu"]
+[gd_scene load_steps=4 format=3 uid="uid://bugs7vofjtnlk"]
 
 [ext_resource type="Texture2D" uid="uid://cfsaspqgj6lsp" path="res://Textures/enemyUFO.png" id="1_ps4tl"]
 [ext_resource type="Script" path="res://powerup.gd" id="1_wvddi"]

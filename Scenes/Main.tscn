@@ -5,13 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://dv6125bir4jsb" path="res://Scenes/EnemyShooter.tscn" id="3_350oi"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Texture2D" uid="uid://bdingj2rutr0n" path="res://Textures/Background.jpg" id="3_t6k68"]
-[ext_resource type="PackedScene" uid="uid://bafdyborke2hu" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
+[ext_resource type="PackedScene" uid="uid://bugs7vofjtnlk" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
 [ext_resource type="Texture2D" uid="uid://bs3vb325a3xp1" path="res://Textures/player_sheet.png" id="5_ageo2"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
 [ext_resource type="AudioStream" uid="uid://cqrpka1qwerq0" path="res://Sounds/hit.mp3" id="7_ntapv"]
-[ext_resource type="AudioStream" uid="uid://dx8mj2eq325tl" path="res://Sounds/background.mp3" id="9_enh43"]
 [ext_resource type="Script" path="res://wave_label.gd" id="11_mhvwb"]
+[ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
+[ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
+
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
 radius = 25.3247
@@ -31,6 +33,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.8)
 metadata/_snap_enabled = true
 
+<<<<<<< HEAD
 [sub_resource type="FontFile" id="FontFile_dvovh"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
@@ -57,6 +60,10 @@ cache/0/64/0/descent = 0.0
 cache/0/64/0/underline_position = 0.0
 cache/0/64/0/underline_thickness = 0.0
 cache/0/64/0/scale = 1.0
+=======
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31pxv"]
+size = Vector2(488, 294)
+>>>>>>> branch2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
@@ -200,8 +207,21 @@ script = ExtResource("11_mhvwb")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(363, 668)
 scale = Vector2(1.03429, 0.951429)
-stream = ExtResource("9_enh43")
+stream = ExtResource("11_xw7u7")
 volume_db = -10.146
 autoplay = true
+
+[node name="Boss" type="Area2D" parent="."]
+visible = false
+position = Vector2(352, 452)
+
+[node name="Sprite2D" type="Sprite2D" parent="Boss"]
+position = Vector2(8.99999, -260)
+scale = Vector2(0.343364, 0.223576)
+texture = ExtResource("12_uok7k")
+
+[node name="BossCollisionShape2D" type="CollisionShape2D" parent="Boss"]
+position = Vector2(11, -251)
+shape = SubResource("RectangleShape2D_31pxv")
 
 [connection signal="pressed" from="HUD/HomeButton" to="." method="_on_home_button_pressed"]
