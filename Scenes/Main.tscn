@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
 [ext_resource type="AudioStream" uid="uid://cqrpka1qwerq0" path="res://Sounds/hit.mp3" id="7_ntapv"]
-[ext_resource type="AudioStream" uid="uid://dx8mj2eq325tl" path="res://Sounds/background.mp3" id="9_enh43"]
+[ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
@@ -164,7 +164,7 @@ offset_bottom = 23.0
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(363, 668)
 scale = Vector2(1.03429, 0.951429)
-stream = ExtResource("9_enh43")
+stream = ExtResource("11_xw7u7")
 volume_db = -10.146
 autoplay = true
 

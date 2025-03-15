@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://c14b1i8u1hd0w"]
+
+[ext_resource type="Script" path="res://guide.gd" id="1_18pt3"]
+[ext_resource type="Texture2D" uid="uid://d031rvm2hcx4p" path="res://Textures/guideBackground.jpg" id="1_o4r2j"]
+[ext_resource type="Texture2D" uid="uid://bb6ic0c1rpfv3" path="res://Textures/howtoplay.png" id="2_pik7r"]
+[ext_resource type="Texture2D" uid="uid://dssqnm0kokyjn" path="res://Textures/rule1.png" id="3_kx78v"]
+[ext_resource type="Texture2D" uid="uid://dhk8k5dlepmub" path="res://Textures/rule2.png" id="4_vuhtl"]
+[ext_resource type="Texture2D" uid="uid://wkstdgn63v32" path="res://Textures/rule3.png" id="5_gelal"]
+[ext_resource type="Texture2D" uid="uid://bxb2npktkctp4" path="res://Textures/rule4.png" id="6_jbf22"]
+[ext_resource type="Texture2D" uid="uid://cuvyube4nsvoi" path="res://Textures/home.png" id="7_mg4tl"]
+[ext_resource type="AudioStream" uid="uid://bndxn27sn3fwf" path="res://Sounds/guide_background.mp3" id="9_y1ft5"]
+[ext_resource type="Texture2D" uid="uid://bpt1sloswjga2" path="res://Textures/rule5.png" id="10_h2c08"]
+
+[node name="Guide" type="Node2D"]
+script = ExtResource("1_18pt3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 724.0
+offset_bottom = 1284.0
+texture = ExtResource("1_o4r2j")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 169.0
+offset_top = 481.0
+offset_right = 580.0
+offset_bottom = 564.0
+texture = ExtResource("2_pik7r")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+offset_left = 55.0
+offset_top = 795.0
+offset_right = 608.0
+offset_bottom = 834.0
+texture = ExtResource("3_kx78v")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+offset_left = 54.0
+offset_top = 861.0
+offset_right = 715.0
+offset_bottom = 900.0
+texture = ExtResource("4_vuhtl")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+offset_left = 55.0
+offset_top = 933.0
+offset_right = 445.0
+offset_bottom = 973.0
+texture = ExtResource("5_gelal")
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+offset_left = 56.0
+offset_top = 1009.0
+offset_right = 603.0
+offset_bottom = 1048.0
+texture = ExtResource("6_jbf22")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 551.0
+offset_top = 1171.0
+offset_right = 702.0
+offset_bottom = 1257.0
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.0
+offset_right = 130.0
+offset_bottom = 60.0
+texture = ExtResource("7_mg4tl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_y1ft5")
+autoplay = true
+
+[node name="TextureRect7" type="TextureRect" parent="."]
+offset_left = 59.0
+offset_top = 1081.0
+offset_right = 657.0
+offset_bottom = 1121.0
+texture = ExtResource("10_h2c08")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

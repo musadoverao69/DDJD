@@ -5,7 +5,7 @@ extends Area2D  # Alterado para Area2D
 @onready var invicibilityTimer := $InvicibilityTimer
 
 @export var speed := 300
-@export var invincTime := 6  # Tempo de invencibilidade (meio segundo)
+@export var invincTime := 10  # Tempo de invencibilidade 
 
 var base_speed := 300
 var powerup_active := false

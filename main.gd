@@ -42,17 +42,17 @@ func spawn_enemy():
 
 
 func _on_enemy_destroyed():
-	enemies_remaining -= 1  # Reduz o número de inimigos restantes
-	enemies_destroyed += 1  # Incrementa o contador de inimigos mortos
-	print("💀 Inimigo destruído! Restantes:", enemies_remaining)  # Debug
-	
+	enemies_remaining -= 1
+	enemies_destroyed += 1
+	print("💀 Inimigo destruído! Restantes:", enemies_remaining)
 
+	# 🎁 Chance de spawnar power-up
+	if randf() < 0.1:
+		spawn_powerup()
 
-	# 🚨 Garante que a wave só termina quando todos os inimigos forem eliminados
 	if enemies_remaining <= 0:
 		check_wave_complete()
-		
-		
+
 
 
 func spawn_powerup():
