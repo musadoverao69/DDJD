@@ -125,7 +125,7 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
-		if current_wave == 5:  # Quando a wave 5 termina, ativa o boss e para as waves
+		if current_wave == 7:  # Quando a wave 7 termina, ativa o boss e para as waves
 			print("⚠️ O Boss apareceu! Nenhuma wave nova será iniciada.")
 			boss_node.visible = true  # Torna o boss visível
 			boss_node.process_mode = Node.PROCESS_MODE_INHERIT  # Ativa processamento do boss

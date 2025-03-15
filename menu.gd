@@ -5,7 +5,7 @@ func _ready():
 	$StartButton.connect("pressed", Callable(self, "_on_start_button_pressed"))
 	
 	# Conecta o sinal "pressed" do GuideButton ao método "_on_button_pressed"
-	$StartButton/GuideButton.connect("pressed", Callable(self, "_on_button_pressed"))
+	$StartButton.get_node("GuideButton").connect("pressed", Callable(self, "_on_button_pressed"))
 
 func _on_start_button_pressed():
 	# Carrega a cena principal do jogo

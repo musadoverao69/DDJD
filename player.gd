@@ -1,4 +1,4 @@
-extends Area2D  # Alterado para Area2D
+extends Area2D
 
 @onready var sprite := $Sprite2D
 @onready var powerup_light := $PointLight2D
@@ -29,9 +29,10 @@ func _process(delta):
 	position.x = clamp(position.x, min_x, max_x)
 	
 	if powerup_active and Input.is_action_just_pressed("ui_accept"):
-		destroy_all_enemies()
+		destroy_random_enemies(4)  # Chama a função para destruir os inimigos mais próximos
 		powerup_active = false
-		print("💥 Todas as naves inimigas foram destruídas!")
+		powerup_light.visible = false  # Desativa a luz após a explosão
+		print("💥 Inimigos mais próximos destruídos!")
 	
 	if input_vector.x < 0:
 		sprite.frame = 0
@@ -53,7 +54,6 @@ func _on_area_entered(area):
 			$"/root/Main/HUD".lose_life()  # Reduz uma vida usando o HUD
 			emit_signal("enemy_collided") # 🚨 Emite o sinal para o Main reduzir o número de inimigos restantes
 
-
 # Power-up de invencibilidade
 func activate_invincibility():
 	is_invincible = true  # O jogador fica invencível
@@ -66,7 +66,7 @@ func _on_invincibility_timer_timeout():
 	sprite.self_modulate = Color(1, 1, 1, 1)  # Volta ao normal
 	print("❌ Invencibilidade acabou!")
 
-# Power-up de destruição total
+# Função para aplicar power-ups
 func apply_powerup(powerup_type):
 	if powerup_type == "destroy":
 		powerup_active = true
@@ -74,8 +74,16 @@ func apply_powerup(powerup_type):
 	elif powerup_type == "invincibility":
 		activate_invincibility()  # Chama a função correta de invencibilidade
 
-func destroy_all_enemies():
-	for enemy in get_tree().get_nodes_in_group("enemies"):
+# Função de destruição dos inimigos 
+func destroy_random_enemies(count: int = 4):
+	# Pega todos os inimigos da cena
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	
+	# Embaralha a lista de inimigos
+	enemies.shuffle()
+
+	# Destroi os 'count' primeiros inimigos da lista embaralhada
+	for i in range(min(count, enemies.size())):
+		var enemy = enemies[i]
 		enemy.destroy_enemy()
-	powerup_active = false
-	powerup_light.visible = false
+	print("💥 Inimigos aleatórios destruídos!")

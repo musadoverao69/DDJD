@@ -33,7 +33,6 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0.8)
 metadata/_snap_enabled = true
 
-<<<<<<< HEAD
 [sub_resource type="FontFile" id="FontFile_dvovh"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
@@ -60,10 +59,9 @@ cache/0/64/0/descent = 0.0
 cache/0/64/0/underline_position = 0.0
 cache/0/64/0/underline_thickness = 0.0
 cache/0/64/0/scale = 1.0
-=======
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31pxv"]
 size = Vector2(488, 294)
->>>>>>> branch2
+
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
