@@ -4,7 +4,7 @@ extends Node2D
 @export var enemy_shooter_scene: PackedScene # Cena do novo inimigo
 @export var powerup_scene: PackedScene 
 @export var spawn_interval: float = 2.0  # Tempo entre spawns
-@export var total_waves := 10  # Número total de waves
+@export var total_waves := 7  # Número total de waves
 @export var spawn_delay: float = 1.5 
 
 @onready var boss_node: Area2D = $Boss  # Pega o nó Boss
@@ -15,9 +15,13 @@ var enemies_remaining := 0  # Contador de inimigos restantes
 var enemies_destroyed: int = 0
 var min_x: float = 20
 var max_x: float = 700
+var available_words := []  # Lista de palavras disponíveis para a wave atual
+var available_difficult_words := []  # Lista de palavras difíceis disponíveis
+var current_target: Node = null  # Inimigo que está sendo digitado
 
 @onready var hud := $HUD
 @onready var wave_label := $HUD/WaveLabel  # Certifique-se de ter um Label na HUD
+@onready var won_label := $HUD/WonLabel 
 @onready var player := $Player 
 
 var words := [
@@ -37,10 +41,22 @@ func spawn_enemy(enemy_type: PackedScene = enemy_scene):  # Padrão: enemy_scene
 	if enemy_type:
 		var enemy = enemy_type.instantiate()
 		enemy.position = Vector2(randf_range(min_x, max_x), 0)  # Spawn aleatório no topo
+		
 		if enemy_type == enemy_scene:
-			enemy.target_word = words.pick_random()  # Escolher uma palavra aleatória
+			if available_words.size() > 0:
+				var word_index = randi() % available_words.size()
+				enemy.target_word = available_words[word_index]  # Pega a palavra
+				available_words.remove_at(word_index)  # Remove da lista
+			else:
+				enemy.target_word = "error"  # Segurança se a lista acabar
 		else:
-			enemy.target_word = difficult_words.pick_random()
+			if available_difficult_words.size() > 0:
+				var word_index = randi() % available_difficult_words.size()
+				enemy.target_word = available_difficult_words[word_index]
+				available_difficult_words.remove_at(word_index)
+			else:
+				enemy.target_word = "error"
+		
 		enemy.add_to_group("enemies")
 		enemy.destroyed.connect(_on_enemy_destroyed)
 		add_child(enemy)
@@ -56,9 +72,6 @@ func _on_enemy_destroyed():
 
 	if enemies_remaining <= 0:
 		check_wave_complete()
-
-
-
 
 func spawn_powerup():
 	if powerup_scene:
@@ -78,13 +91,26 @@ func spawn_powerup():
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key = event.unicode if event.unicode > 0 else event.keycode
-		
+
 		# Verifica se a tecla pressionada é válida
 		if key > 0:
-			var character = char(key)  # Converte o código em caractere
-			for enemy in get_tree().get_nodes_in_group("enemies"):
-				if enemy.has_method("add_letter"):  # Garante que o inimigo tem a função
-					enemy.add_letter(character)
+			var character = char(key)
+			
+			# Se não houver um alvo, escolhe um automaticamente
+			if current_target == null:
+				for enemy in get_tree().get_nodes_in_group("enemies"):
+					if enemy.has_method("add_letter") and enemy.target_word.begins_with(character):
+						current_target = enemy
+						break  # Para no primeiro inimigo compatível
+						
+			# Se já houver um alvo, envia a letra apenas para ele
+			if current_target:
+				if current_target.has_method("add_letter"):
+					current_target.add_letter(character)
+					
+					# Se a palavra foi completada, liberar para escolher outro alvo
+					if current_target.typed_word == current_target.target_word:
+						current_target = null  # Libera para digitar outra palavra
 
 func _on_home_button_pressed():
 	get_tree().paused = false  # Despausa antes de mudar de cena
@@ -95,6 +121,11 @@ func start_wave():
 	wave_label.show()
 	await get_tree().create_timer(2).timeout  # Exibe por 2 segundos
 	wave_label.hide()
+	
+	# 🔄 Atualiza a lista de palavras disponíveis para esta wave
+	available_words = words.duplicate()  # Cria uma cópia da lista original
+	available_difficult_words = difficult_words.duplicate()
+	
 	# 🚨 Ajustando o número de inimigos para cada wave
 	var enemies_to_spawn = current_wave + 3 
 	enemies_remaining = enemies_to_spawn
@@ -120,7 +151,6 @@ func start_wave():
 			await get_tree().process_frame  # Espera um frame antes de checar novamente
 		
 		await get_tree().create_timer(1).timeout  # Pequeno delay entre os spawns
-		
 		spawn_enemy(enemy_type)  # Agora os inimigos surgem aleatoriamente
 
 func check_wave_complete():
@@ -138,10 +168,7 @@ func check_wave_complete():
 		else:
 			game_won()  # Se for a última wave, o jogo termina
 
-
-
 func show_wave_complete():
-	hud.hide()  # Esconde a HUD temporariamente
 	wave_label.score = hud.score  # Atualiza o score antes de exibir
 	wave_label.text = "WAVE " + str(current_wave).pad_zeros(3) + " CLEAR"
 	wave_label.show()
@@ -149,13 +176,11 @@ func show_wave_complete():
 
 	await get_tree().create_timer(3).timeout  # Exibe por 3 segundos
 	wave_label.hide()
-	hud.show()  # Mostra a HUD novamente
 
 	start_wave()  # Inicia a próxima wave
 
 func game_won():
-	hud.hide()
-	wave_label.text = "🎉 GAME COMPLETE 🎉\nSCORE: " + str(hud.score)
-	wave_label.show()
+	won_label.text = " GAME COMPLETE \nSCORE: " + str(hud.score)
+	won_label.show()
 	await get_tree().create_timer(5).timeout
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Volta para o menu

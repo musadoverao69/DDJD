@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=20 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
 [ext_resource type="PackedScene" uid="uid://dv6125bir4jsb" path="res://Scenes/EnemyShooter.tscn" id="3_350oi"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Texture2D" uid="uid://bdingj2rutr0n" path="res://Textures/Background.jpg" id="3_t6k68"]
-[ext_resource type="PackedScene" uid="uid://bugs7vofjtnlk" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
+[ext_resource type="PackedScene" uid="uid://bafdyborke2hu" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
 [ext_resource type="Texture2D" uid="uid://bs3vb325a3xp1" path="res://Textures/player_sheet.png" id="5_ageo2"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://wave_label.gd" id="11_mhvwb"]
 [ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
-
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
 radius = 25.3247
@@ -59,9 +58,21 @@ cache/0/64/0/descent = 0.0
 cache/0/64/0/underline_position = 0.0
 cache/0/64/0/underline_thickness = 0.0
 cache/0/64/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_0336i"]
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_31pxv"]
 size = Vector2(488, 294)
-
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tcf02")
@@ -190,17 +201,33 @@ vertical_alignment = 1
 clip_contents = true
 anchors_preset = -1
 anchor_top = 0.444
-anchor_right = 0.711
-anchor_bottom = 0.55
-offset_left = 16.0
-offset_top = 7.67993
-offset_right = 8.07999
-offset_bottom = -8.0
+anchor_right = 1.0
+anchor_bottom = 0.694
+offset_left = 96.0
+offset_top = 79.68
+offset_right = -120.0
+offset_bottom = -120.32
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0.0823529, 0.756863, 0.92549, 1)
 theme_override_fonts/font = SubResource("FontFile_dvovh")
 theme_override_font_sizes/font_size = 64
 script = ExtResource("11_mhvwb")
+
+[node name="WonLabel" type="Label" parent="HUD"]
+clip_contents = true
+anchors_preset = -1
+anchor_top = 0.419
+anchor_right = 1.0
+anchor_bottom = 0.562
+offset_left = 96.0
+offset_top = 15.6799
+offset_right = -104.0
+offset_bottom = -15.36
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0.0823529, 0.756863, 0.92549, 1)
+theme_override_fonts/font = SubResource("FontFile_0336i")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(363, 668)
