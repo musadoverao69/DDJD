@@ -155,7 +155,7 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
-		if current_wave == 1:  # Verifica se a sétima wave foi concluída
+		if current_wave == 7:  # Verifica se a sétima wave foi concluída
 			print("Sétima wave concluída! Ativando o boss.")
 			$Boss.activate()  # Ativa o boss para começar a atirar
 		elif current_wave < total_waves:

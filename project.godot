@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Astro Boundy"
+config/name="Astro Bounty"
 run/main_scene="res://Scenes/Menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.10928, 0.113114, 0.415593, 1)
+config/icon="res://Textures/icon.svg"
 
 [autoload]
 
@@ -23,6 +24,7 @@ Signals="*res://signals.gd"
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/size/mode=2
 window/stretch/mode="viewport"
 
 [rendering]
