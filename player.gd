@@ -5,13 +5,15 @@ extends Area2D
 @onready var invicibilityTimer := $InvicibilityTimer
 
 @export var speed := 300
-@export var invincTime := 10  # Tempo de invencibilidade 
+@export var invincTime := 4  # Tempo de invencibilidade 
 
 var base_speed := 300
 var powerup_active := false
 var is_invincible := false  # Jogador começa sem invencibilidade
 var min_x: float = 20
 var max_x: float = 700
+
+var stored_powerup: String = ""  # Armazena o power-up coletado
 
 signal enemy_collided
 
@@ -28,11 +30,16 @@ func _process(delta):
 	
 	position.x = clamp(position.x, min_x, max_x)
 	
-	if powerup_active and Input.is_action_just_pressed("ui_accept"):
-		destroy_random_enemies(4)  # Chama a função para destruir os inimigos mais próximos
-		powerup_active = false
-		powerup_light.visible = false  # Desativa a luz após a explosão
-		print("💥 Inimigos mais próximos destruídos!")
+	if Input.is_action_just_pressed("ui_accept"):
+		if powerup_active:  # Se o power-up de explosão estiver ativo
+			destroy_random_enemies(4)  # Ativa a explosão
+			powerup_active = false
+			powerup_light.visible = false
+			print("💥 Inimigos mais próximos destruídos!")
+		elif stored_powerup == "invincibility":  # Se o power-up de escudo estiver armazenado
+			activate_invincibility()  # Ativa o escudo
+			stored_powerup = ""  # Limpa o power-up armazenado
+			print("🛡️ Escudo ativado!")
 	
 	if input_vector.x < 0:
 		sprite.frame = 0
@@ -79,7 +86,8 @@ func apply_powerup(powerup_type):
 		powerup_active = true
 		powerup_light.visible = true
 	elif powerup_type == "invincibility":
-		activate_invincibility()  # Chama a função correta de invencibilidade
+		stored_powerup = "invincibility"  # Armazena o power-up de escudo
+		print("Escudo coletado! Pressione Enter para ativá-lo.")
 
 # Função de destruição dos inimigos 
 func destroy_random_enemies(count: int = 4):
@@ -94,3 +102,8 @@ func destroy_random_enemies(count: int = 4):
 		var enemy = enemies[i]
 		enemy.destroy_enemy()
 	print("💥 Inimigos aleatórios destruídos!")
+
+func store_powerup(powerup_type):
+	if powerup_type == "invincibility":
+		stored_powerup = "invincibility"  # Armazena o power-up de escudo
+		print("Escudo coletado! Pressione Enter para ativá-lo.")

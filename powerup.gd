@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: float = 100.0  # Velocidade do power-up
+@export var speed: float = 150.0  # Velocidade do power-up
 @export var type: String = "destroy"  # Pode ser "destroy" ou "invincibility"
 @onready var sprite := $Sprite2D  # Referência ao Sprite do power-up
 
