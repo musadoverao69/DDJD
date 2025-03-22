@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgkjjwpkg0ldd"]
+[gd_scene load_steps=10 format=3 uid="uid://dgkjjwpkg0ldd"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_g4hbi"]
+[ext_resource type="Shader" path="res://Scenes/Menu.gdshader" id="2_ahll8"]
 [ext_resource type="Texture2D" uid="uid://k1uqharvej0c" path="res://Textures/backg.jpg" id="2_fk112"]
 [ext_resource type="Theme" uid="uid://dv44v7msi4pel" path="res://custom.tres" id="3_htmh6"]
 [ext_resource type="Texture2D" uid="uid://bfpafcin0fpt4" path="res://Textures/title.png" id="3_piya1"]
 [ext_resource type="Texture2D" uid="uid://bmlbsfek1dcbp" path="res://Textures/GuideButton.png" id="4_hg0hm"]
 [ext_resource type="Texture2D" uid="uid://b0xdfn3nly5n6" path="res://Textures/Start.png" id="5_4nkn4"]
 [ext_resource type="AudioStream" uid="uid://cke66fmunutwb" path="res://Sounds/home.mp3" id="6_3j02w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m2bbj"]
+shader = ExtResource("2_ahll8")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -16,10 +20,12 @@ offset_bottom = 1280.0
 script = ExtResource("1_g4hbi")
 
 [node name="Background" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_m2bbj")
 layout_mode = 0
-offset_left = -13.0
+offset_left = -427.0
 offset_top = -13.0
-offset_right = 723.0
+offset_right = 1199.0
 offset_bottom = 1392.0
 texture = ExtResource("2_fk112")
 expand_mode = 1

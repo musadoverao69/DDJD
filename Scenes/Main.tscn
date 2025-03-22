@@ -1,18 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=22 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
 [ext_resource type="PackedScene" uid="uid://dv6125bir4jsb" path="res://Scenes/EnemyShooter.tscn" id="3_350oi"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Texture2D" uid="uid://bdingj2rutr0n" path="res://Textures/Background.jpg" id="3_t6k68"]
-[ext_resource type="PackedScene" uid="uid://bafdyborke2hu" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
+[ext_resource type="PackedScene" uid="uid://bugs7vofjtnlk" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
 [ext_resource type="Texture2D" uid="uid://bs3vb325a3xp1" path="res://Textures/player_sheet.png" id="5_ageo2"]
+[ext_resource type="Shader" path="res://Scenes/main.gdshader" id="5_amxtl"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
 [ext_resource type="Texture2D" uid="uid://cuxgksg2sewjj" path="res://Textures/Heart.png" id="7_4yrta"]
 [ext_resource type="AudioStream" uid="uid://cqrpka1qwerq0" path="res://Sounds/hit.mp3" id="7_ntapv"]
 [ext_resource type="Script" path="res://wave_label.gd" id="11_mhvwb"]
 [ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ps25"]
+shader = ExtResource("5_amxtl")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy3uk"]
 radius = 25.3247
@@ -80,9 +84,13 @@ enemy_scene = ExtResource("2_mtbg6")
 enemy_shooter_scene = ExtResource("3_350oi")
 powerup_scene = ExtResource("3_u5f3q")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(363, 668)
-scale = Vector2(1.03429, 0.951429)
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_7ps25")
+offset_left = -183.0
+offset_top = -193.0
+offset_right = 914.0
+offset_bottom = 1468.0
 texture = ExtResource("3_t6k68")
 
 [node name="Player" type="Area2D" parent="." groups=["player"]]
