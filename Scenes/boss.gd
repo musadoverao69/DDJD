@@ -1,0 +1,31 @@
+extends Area2D
+
+@export var move_distance := 200  # Distância total do movimento
+@export var move_speed := 2.0  # Velocidade do movimento
+@export var max_health := 100  # Vida máxima do boss
+var current_health := max_health  # Vida atual do boss
+
+var direction := 1  # 1 = direita, -1 = esquerda
+
+func _ready():
+	move_boss()
+
+func move_boss():
+	var tween = create_tween()
+	var target_position = position.x + (move_distance * direction)
+
+	tween.tween_property(self, "position:x", target_position, move_speed).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.finished.connect(_on_tween_finished)
+
+func _on_tween_finished():
+	direction *= -1  # Inverter direção
+	move_boss()  # Repetir movimento
+
+func take_damage(amount: int):
+	current_health -= amount
+	if current_health <= 0:
+		die()
+
+func die():
+	queue_free()  # Remove o boss do jogo quando a vida chega a 0
+	print("Boss derrotado!")

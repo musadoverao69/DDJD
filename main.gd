@@ -117,7 +117,7 @@ func _on_home_button_pressed():
 	var result = get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Tenta mudar de cena
 
 func start_wave():
-	wave_label.text = "WAVE " + str(current_wave).pad_zeros(3) + " START"
+	wave_label.text = "WAVE " + str(current_wave).pad_zeros(2) + " START"
 	wave_label.show()
 	await get_tree().create_timer(2).timeout  # Exibe por 2 segundos
 	wave_label.hide()
@@ -155,13 +155,10 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
-		if current_wave == 7:  # Quando a wave 7 termina, ativa o boss e para as waves
-			print("⚠️ O Boss apareceu! Nenhuma wave nova será iniciada.")
-			boss_node.visible = true  # Torna o boss visível
-			boss_node.process_mode = Node.PROCESS_MODE_INHERIT  # Ativa processamento do boss
-			return  # Cancela qualquer nova wave
-		
-		if current_wave < total_waves:
+		if current_wave == 1:  # Verifica se a sétima wave foi concluída
+			print("Sétima wave concluída! Ativando o boss.")
+			$Boss.activate()  # Ativa o boss para começar a atirar
+		elif current_wave < total_waves:
 			await get_tree().create_timer(1).timeout  # Pequena pausa antes da nova wave
 			current_wave += 1
 			show_wave_complete()
@@ -170,7 +167,7 @@ func check_wave_complete():
 
 func show_wave_complete():
 	wave_label.score = hud.score  # Atualiza o score antes de exibir
-	wave_label.text = "WAVE " + str(current_wave).pad_zeros(3) + " CLEAR"
+	wave_label.text = "WAVE " + str(current_wave - 1).pad_zeros(2) + " CLEARED"
 	wave_label.show()
 	wave_label.queue_redraw()  # Redesenha para garantir que o score apareça atualizado
 
@@ -184,3 +181,11 @@ func game_won():
 	won_label.show()
 	await get_tree().create_timer(5).timeout
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Volta para o menu
+
+
+func _on_boss_boss_defeated() -> void:
+	pass # Replace with function body.
+
+
+func _on_shoot_timer_timeout() -> void:
+	pass # Replace with function body.

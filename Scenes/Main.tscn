@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dha08oajfbq82"]
+[gd_scene load_steps=24 format=3 uid="uid://dha08oajfbq82"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tcf02"]
 [ext_resource type="PackedScene" uid="uid://dog6dnupt7s46" path="res://Scenes/Enemy.tscn" id="2_mtbg6"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://wave_label.gd" id="11_mhvwb"]
 [ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
+[ext_resource type="Script" path="res://boss.gd" id="14_d2857"]
+[ext_resource type="PackedScene" uid="uid://dfhl2mi8hddaq" path="res://Scenes/BossProjectile.tscn" id="15_u74bj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ps25"]
 shader = ExtResource("5_amxtl")
@@ -247,14 +249,20 @@ autoplay = true
 [node name="Boss" type="Area2D" parent="."]
 visible = false
 position = Vector2(352, 452)
+script = ExtResource("14_d2857")
+projectile_scene = ExtResource("15_u74bj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Boss"]
-position = Vector2(8.99999, -260)
+position = Vector2(-7.62939e-06, -246)
 scale = Vector2(0.343364, 0.223576)
 texture = ExtResource("12_uok7k")
 
 [node name="BossCollisionShape2D" type="CollisionShape2D" parent="Boss"]
-position = Vector2(11, -251)
+position = Vector2(0, -246)
 shape = SubResource("RectangleShape2D_31pxv")
 
+[node name="ShootTimer" type="Timer" parent="Boss"]
+
 [connection signal="pressed" from="HUD/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="boss_defeated" from="Boss" to="." method="_on_boss_boss_defeated"]
+[connection signal="timeout" from="Boss/ShootTimer" to="." method="_on_shoot_timer_timeout"]
