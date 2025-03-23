@@ -51,8 +51,7 @@ func shoot_letter():
 		var angles = [-PI - PI / 4, -11 * PI / 8, -PI - PI / 2,-13 * PI / 8,2 * -PI + PI / 4] 
 		for angle in angles: 
 			var letter_projectile = letter_scene.instantiate()
-			letter_projectile.position = $LettersSpawner.global_position
-			letter_projectile.letter = String.chr(randi_range(65, 90))  # Letra aleatória (A-Z)
+			letter_projectile.position = $LettersSpawner.global_position 
 			letter_projectile.direction = Vector2.from_angle(angle) 
 			get_parent().add_child(letter_projectile)
 		

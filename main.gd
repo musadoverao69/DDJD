@@ -25,13 +25,13 @@ var current_target: Node = null  # Inimigo que está sendo digitado
 @onready var player := $Player 
 
 var words := [
-	"space", "galaxy", "planet", "nebula", "starship", "orbit", 
-	"cosmos", "engine", "shader", "debug", "sprite","feup",
-	"there", "happy", "tese", "hand"]
+	"space", "galaxy", "planet", "nebula", "orbit", 
+	"cosmos", "engine", "debug", "feup", "widget",
+	"there",  "hand", "binary", "input", "module" ]
 
 var difficult_words := [
-	"pixelart", "viewport", "collision", "particles","supernova",
-	"asteroid", "blackhole","prototype", "gameloop"]
+	"viewport", "collision", "particles","supernova",
+	"asteroid", "blackhole", "gameloop"]
 
 func _ready():
 	start_wave()  # Começa a primeira wave quando o jogo iniciar
@@ -147,8 +147,8 @@ func start_wave():
 	enemy_list.shuffle()
 	# ⏳ Spawnando os inimigos com delay entre cada um
 	for enemy_type in enemy_list:
-		while get_tree().paused:  # ⚠️ Aguarda enquanto o jogo estiver pausado
-			await get_tree().process_frame  # Espera um frame antes de checar novamente
+		while get_tree().paused:
+			await get_tree().create_timer(0.1, true).timeout
 		
 		await get_tree().create_timer(1).timeout  # Pequeno delay entre os spawns
 		spawn_enemy(enemy_type)  # Agora os inimigos surgem aleatoriamente
@@ -167,11 +167,7 @@ func check_wave_complete():
 
 func show_wave_complete():
 	wave_label.score = hud.score  # Atualiza o score antes de exibir
-	wave_label.text = "WAVE " + str(current_wave - 1).pad_zeros(2) + " CLEARED"
-	wave_label.show()
 	wave_label.queue_redraw()  # Redesenha para garantir que o score apareça atualizado
-
-	await get_tree().create_timer(3).timeout  # Exibe por 3 segundos
 	wave_label.hide()
 
 	start_wave()  # Inicia a próxima wave

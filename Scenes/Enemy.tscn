@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dog6dnupt7s46"]
+[gd_scene load_steps=6 format=3 uid="uid://dog6dnupt7s46"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_ccc7a"]
 [ext_resource type="Texture2D" uid="uid://canecrj08g2ml" path="res://Textures/enemyShip.png" id="2_1dci8"]
@@ -6,6 +6,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k26k0"]
 radius = 28.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bkyi"]
+resource_local_to_scene = true
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_ccc7a")
@@ -27,6 +31,7 @@ offset_bottom = 72.0
 scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 3
 size_flags_vertical = 6
+theme_override_styles/background = SubResource("StyleBoxFlat_1bkyi")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dv6125bir4jsb" path="res://Scenes/EnemyShooter.tscn" id="3_350oi"]
 [ext_resource type="Script" path="res://player.gd" id="3_t0w0c"]
 [ext_resource type="Texture2D" uid="uid://bdingj2rutr0n" path="res://Textures/Background.jpg" id="3_t6k68"]
-[ext_resource type="PackedScene" uid="uid://bugs7vofjtnlk" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
+[ext_resource type="PackedScene" uid="uid://bafdyborke2hu" path="res://Scenes/Powerup.tscn" id="3_u5f3q"]
 [ext_resource type="Texture2D" uid="uid://bs3vb325a3xp1" path="res://Textures/player_sheet.png" id="5_ageo2"]
 [ext_resource type="Shader" path="res://Scenes/main.gdshader" id="5_amxtl"]
 [ext_resource type="Script" path="res://hud.gd" id="6_ji0j8"]
@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
 [ext_resource type="Script" path="res://boss.gd" id="14_d2857"]
-[ext_resource type="PackedScene" uid="uid://dfhl2mi8hddaq" path="res://Scenes/BossProjectile.tscn" id="15_u74bj"]
+[ext_resource type="PackedScene" path="res://Scenes/BossProjectile.tscn" id="15_u74bj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ps25"]
 shader = ExtResource("5_amxtl")

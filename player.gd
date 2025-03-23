@@ -61,6 +61,11 @@ func _on_area_entered(area):
 			$"/root/Main/HUD".lose_life()  # Reduz uma vida usando o HUD
 			emit_signal("enemy_collided") # 🚨 Emite o sinal para o Main reduzir o número de inimigos restantes
 	
+	elif area.is_in_group("enemy_projectiles"):
+		if not is_invincible:
+			$hit_sound.play()
+			$"/root/Main/HUD".lose_life()
+		area.queue_free()
 	# Verifica se a área é um projétil do boss
 	elif area.is_in_group("boss_projectiles"):
 		if not is_invincible:  # Só perde vida se não estiver invencível

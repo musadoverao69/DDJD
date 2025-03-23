@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bphny6qw8mpvs"]
+
+[ext_resource type="Script" path="res://impact_effect.gd" id="1_i33c7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q08eo"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="Gradient" id="Gradient_cuhtk"]
+colors = PackedColorArray(0.0823529, 0.756863, 0.92549, 1, 1, 1, 1, 1)
+metadata/_snap_count = 22
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkrh1"]
+gradient = SubResource("Gradient_cuhtk")
+fill_from = Vector2(0.873449, 0.545906)
+fill_to = Vector2(0.585608, 0.53598)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_q08eo")
+texture = SubResource("GradientTexture2D_lkrh1")
+lifetime = 0.5
+speed_scale = 3.0
+script = ExtResource("1_i33c7")
