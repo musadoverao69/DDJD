@@ -263,6 +263,13 @@ shape = SubResource("RectangleShape2D_31pxv")
 
 [node name="ShootTimer" type="Timer" parent="Boss"]
 
+[node name="WordLabel" type="RichTextLabel" parent="Boss"]
+offset_right = 300.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+autowrap_mode = 0
+
 [connection signal="pressed" from="HUD/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="boss_defeated" from="Boss" to="." method="_on_boss_boss_defeated"]
 [connection signal="timeout" from="Boss/ShootTimer" to="." method="_on_shoot_timer_timeout"]

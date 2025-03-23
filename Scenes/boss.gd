@@ -8,6 +8,7 @@ var current_health := max_health  # Vida atual do boss
 var direction := 1  # 1 = direita, -1 = esquerda
 
 func _ready():
+	print('oioi')
 	await get_tree().process_frame
 	move_boss()
 
@@ -33,7 +34,6 @@ func die():
 
 func shake_appearance() -> void:
 	var original_position = global_position
-	print('oioi')
 	for i in range(8):
 		global_position = original_position + Vector2(randf_range(-5, 5), randf_range(-5, 5))
 		await get_tree().create_timer(0.035).timeout

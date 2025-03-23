@@ -25,7 +25,7 @@ var current_target: Node = null  # Inimigo que está sendo digitado
 @onready var player := $Player 
 
 var words := [
-	"space", "galaxy", "planet", "nebula", "orbit", 
+	"space", "galaxy", "planet", "nebula", "action",
 	"cosmos", "engine", "debug", "feup", "widget",
 	"there",  "hand", "binary", "input", "module" ]
 
@@ -102,7 +102,9 @@ func _input(event):
 					if enemy.has_method("add_letter") and enemy.target_word.begins_with(character):
 						current_target = enemy
 						break  # Para no primeiro inimigo compatível
-						
+				var boss = $Boss
+				if boss.word_label.visible and boss.target_word.begins_with(character):
+					current_target = boss
 			# Se já houver um alvo, envia a letra apenas para ele
 			if current_target:
 				if current_target.has_method("add_letter"):
@@ -155,8 +157,7 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
-		if current_wave == 7:  # Verifica se a sétima wave foi concluída
-			print("Sétima wave concluída! Ativando o boss.")
+		if current_wave == 1:  # Verifica se a sétima wave foi concluída
 			$Boss.activate()  # Ativa o boss para começar a atirar
 		elif current_wave < total_waves:
 			await get_tree().create_timer(1).timeout  # Pequena pausa antes da nova wave
@@ -178,10 +179,32 @@ func game_won():
 	await get_tree().create_timer(5).timeout
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")  # Volta para o menu
 
-
 func _on_boss_boss_defeated() -> void:
 	pass # Replace with function body.
 
-
 func _on_shoot_timer_timeout() -> void:
 	pass # Replace with function body.
+
+func spawn_enemy_at_position(enemy_type: PackedScene, position: Vector2):
+	if enemy_type:
+		var enemy = enemy_type.instantiate()
+		enemy.position = position
+		
+		if enemy_type == enemy_scene:
+			if available_words.size() > 0:
+				var word_index = randi() % available_words.size()
+				enemy.target_word = available_words[word_index]
+				available_words.remove_at(word_index)
+			else:
+				enemy.target_word = "error"
+		else:
+			if available_difficult_words.size() > 0:
+				var word_index = randi() % available_difficult_words.size()
+				enemy.target_word = available_difficult_words[word_index]
+				available_difficult_words.remove_at(word_index)
+			else:
+				enemy.target_word = "error"
+		
+		enemy.add_to_group("enemies")
+		enemy.destroyed.connect(_on_enemy_destroyed)
+		add_child(enemy)
