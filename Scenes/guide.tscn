@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvk0parlxhq35"]
+[gd_scene load_steps=11 format=3 uid="uid://bdjouqcuf0qp7"]
 
 [ext_resource type="Script" path="res://guide.gd" id="1_18pt3"]
 [ext_resource type="Texture2D" uid="uid://d031rvm2hcx4p" path="res://Textures/guideBackground.jpg" id="1_o4r2j"]

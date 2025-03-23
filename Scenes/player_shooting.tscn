@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctlw5fkj3asxp"]
+[gd_scene load_steps=4 format=3 uid="uid://byoytc3vadlq5"]
 
 [ext_resource type="Script" path="res://Scenes/player_shooting.gd" id="1_o3msw"]
 [ext_resource type="Texture2D" uid="uid://cx0nvrgi2im2j" path="res://Textures/tiro.png" id="1_ommn0"]

@@ -8,6 +8,7 @@ var current_health := max_health  # Vida atual do boss
 var direction := 1  # 1 = direita, -1 = esquerda
 
 func _ready():
+	await get_tree().process_frame
 	move_boss()
 
 func move_boss():
@@ -29,3 +30,11 @@ func take_damage(amount: int):
 func die():
 	queue_free()  # Remove o boss do jogo quando a vida chega a 0
 	print("Boss derrotado!")
+
+func shake_appearance() -> void:
+	var original_position = global_position
+	print('oioi')
+	for i in range(8):
+		global_position = original_position + Vector2(randf_range(-5, 5), randf_range(-5, 5))
+		await get_tree().create_timer(0.035).timeout
+	global_position = original_position
