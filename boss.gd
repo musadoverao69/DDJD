@@ -3,7 +3,7 @@ extends Area2D
 @export var max_health := 100  # Vida máxima do boss
 @export var projectile_scene: PackedScene  # Cena do projétil
 @export var shoot_interval: float = 2.0  # Intervalo entre disparos (em segundos)
-@export var projectile_speed: float = 200.0  # Velocidade dos projéteis
+@export var projectile_speed: float = 150.0  # Velocidade dos projéteis
 @export var shoot_offset: Vector2 = Vector2(0, 158)  # Deslocamento vertical (20 pixels para baixo)
 @export var final_position: Vector2  # Posição final na tela
 
@@ -40,33 +40,35 @@ func take_damage(amount: int):
 		die()
 
 func die():
+	print("Boss morreu!")  # Depuração
 	emit_signal("boss_defeated")  # Emite o sinal de que o boss foi derrotado
-	queue_free()  # Remove o boss do jogo quando a vida chega a 0
-	print("Boss derrotado!")
+
+	await get_tree().create_timer(1.0).timeout  # Delay 
+
+	get_tree().change_scene_to_file("res://Scenes/VictoryScreen.tscn")  # Muda de cena
+
+	queue_free()  # Agora o boss é removido só depois de trocar a cena
+
+
+
 
 func _on_shoot_timer_timeout():
 	if is_active and projectile_scene:
 		shoot_burst()  # Agora sem contar e delay, pois será baseado em ângulos
 
 func shoot_burst() -> void:
-	var angles = [
-		-PI - PI / 4,
-		-11 * PI / 8,
-		-PI - PI / 2,
-		-13 * PI / 8,
-		2 * -PI + PI / 4
-	]
-
-	for angle in angles:
-		shoot_projectile(angle)
+	for i in range(6):  # Disparar 7 projéteis por vez
+		var random_angle = deg_to_rad(randf_range(-30, 30))  # Ângulo aleatório entre -15° e 15°
+		shoot_projectile(random_angle)
 
 func shoot_projectile(angle: float):
 	var projectile = projectile_scene.instantiate()
 	projectile.position = $Sprite2D.global_position + shoot_offset
 
-	projectile.direction = Vector2.RIGHT.rotated(angle)
+	projectile.direction = Vector2.DOWN.rotated(angle)  
 	projectile.speed = projectile_speed
 	get_parent().add_child(projectile)
+
 
 # Método para ativar o boss (chame isso quando a sétima wave for concluída)
 func activate():

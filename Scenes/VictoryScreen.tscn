@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://js1cy6cpumjj"]
+
+[ext_resource type="Texture2D" uid="uid://crumsuacpjsfs" path="res://Textures/victoryscreen.jpg" id="1_ls1o8"]
+[ext_resource type="Texture2D" uid="uid://c62qsxkcbv2b8" path="res://Textures/victory.png" id="2_m2cg0"]
+[ext_resource type="Texture2D" uid="uid://1m7ea0ipbaoc" path="res://Textures/congratz.png" id="3_eigsy"]
+[ext_resource type="Script" path="res://victory.gd" id="4_6mhno"]
+[ext_resource type="Texture2D" uid="uid://cuvyube4nsvoi" path="res://Textures/home.png" id="5_pjpv0"]
+[ext_resource type="AudioStream" uid="uid://d3rmqbajn524s" path="res://Sounds/victory.mp3" id="6_iouah"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 723.0
+offset_bottom = 1290.0
+texture = ExtResource("1_ls1o8")
+expand_mode = 1
+
+[node name="VictoryLabel" type="TextureRect" parent="."]
+offset_left = 211.0
+offset_top = 786.0
+offset_right = 511.0
+offset_bottom = 849.0
+texture = ExtResource("2_m2cg0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 122.0
+offset_top = 658.0
+offset_right = 606.0
+offset_bottom = 722.0
+texture = ExtResource("3_eigsy")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 520.0
+offset_top = 1159.0
+offset_right = 680.0
+offset_bottom = 1246.0
+script = ExtResource("4_6mhno")
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 22.0
+offset_right = 135.0
+offset_bottom = 65.0
+texture = ExtResource("5_pjpv0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_iouah")
+autoplay = true
