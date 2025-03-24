@@ -5,7 +5,9 @@
 
 - Extract .zip file
 
-- Open Astrobounty_windows.exe
+- Open Astrobounty_windows.exe (or your system version)
+
+- Open guide in Menu for help
 
 
 ## Group Members:
