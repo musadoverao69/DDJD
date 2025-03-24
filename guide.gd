@@ -2,8 +2,9 @@ extends Node2D
 
 # Chamado quando o nó entra na árvore de cena pela primeira vez
 func _ready() -> void:
-	# Conectar o sinal de pressionamento do botão
-	$Button.connect("pressed", Callable(self, "_on_button_pressed"))
+	# Verificar se o sinal já está conectado antes de conectar
+	if not $Button.is_connected("pressed", Callable(self, "_on_button_pressed")):
+		$Button.connect("pressed", Callable(self, "_on_button_pressed"))
 
 # Método chamado quando o botão é pressionado
 func _on_button_pressed() -> void:
