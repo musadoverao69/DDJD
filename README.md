@@ -1,15 +1,15 @@
-## DDJD Group 14
+# DDJD Group 14
 
 
-# Installation guide:
+## Installation guide:
 
--Extract .zip file
+- Extract .zip file
 
--Open Astrobounty_windows.exe
+- Open Astrobounty_windows.exe
 
 
-# Group Members:
+## Group Members:
 
-Bianca Oliveira (up202000139)
+- Bianca Oliveira (up202000139)
 
-Guilherme Cruz (up202403107)
+- Guilherme Cruz (up202403107)
