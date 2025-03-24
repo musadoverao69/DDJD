@@ -57,8 +57,8 @@ func _on_shoot_timer_timeout():
 		shoot_burst()  # Agora sem contar e delay, pois será baseado em ângulos
 
 func shoot_burst() -> void:
-	for i in range(6):  # Disparar 7 projéteis por vez
-		var random_angle = deg_to_rad(randf_range(-30, 30))  # Ângulo aleatório entre -15° e 15°
+	for i in range(7):  # Disparar 7 projéteis por vez
+		var random_angle = deg_to_rad(randf_range(-35, 35))  # Ângulo aleatório entre -15° e 15°
 		shoot_projectile(random_angle)
 
 func shoot_projectile(angle: float):

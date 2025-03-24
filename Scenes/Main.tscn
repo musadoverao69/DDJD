@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cxjddoc3h4wet" path="res://Sounds/song.mp3" id="11_xw7u7"]
 [ext_resource type="Texture2D" uid="uid://cds7vivxojphb" path="res://Textures/boss.png" id="12_uok7k"]
 [ext_resource type="Script" path="res://boss.gd" id="14_d2857"]
-[ext_resource type="PackedScene" uid="uid://dhhjqlmfirf4k" path="res://Scenes/BossProjectile.tscn" id="15_u74bj"]
+[ext_resource type="PackedScene" uid="uid://bnx80eo7eyro" path="res://Scenes/BossProjectile.tscn" id="15_u74bj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ps25"]
 shader = ExtResource("5_amxtl")

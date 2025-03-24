@@ -129,14 +129,16 @@ func start_wave():
 	available_difficult_words = difficult_words.duplicate()
 	
 	# 🚨 Ajustando o número de inimigos para cada wave
-	var enemies_to_spawn = current_wave + 3 
+	var enemies_to_spawn = current_wave + 4
 	enemies_remaining = enemies_to_spawn
 	# 📌 Determinando quantos inimigos atiradores devem aparecer
 	var shooter_count = 0
-	if current_wave in [3, 4, 5]:  
+	if current_wave in [2, 3]:  
 		shooter_count = 1  # 1 inimigo shooter nessas waves
-	elif current_wave in [6, 7, 8, 9]:  
+	elif current_wave in [4, 5]:  
 		shooter_count = 2  # 2 inimigos shooter nessas waves
+	elif current_wave in [6, 7]:  
+		shooter_count = 3  # 2 inimigos shooter nessas waves
 	# Criando uma lista com os tipos de inimigos a serem spawnados
 	var enemy_list = []
 	# Adiciona os shooters na lista
@@ -157,7 +159,7 @@ func start_wave():
 
 func check_wave_complete():
 	if enemies_remaining <= 0:
-		if current_wave == 1:  # Verifica se a sétima wave foi concluída
+		if current_wave == 7:  # Verifica se a sétima wave foi concluída
 			$Boss.activate()  # Ativa o boss para começar a atirar
 		elif current_wave < total_waves:
 			await get_tree().create_timer(1).timeout  # Pequena pausa antes da nova wave
